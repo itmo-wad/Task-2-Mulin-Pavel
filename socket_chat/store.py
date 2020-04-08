@@ -1,6 +1,7 @@
-
-
-
+"""
+save messages to file when it reach to some value (ex. 10)
+should call func save() on exception from serv
+"""
 all_messages = ''
 
 
@@ -17,12 +18,3 @@ def save():
     file = open('history.txt', 'a')
     file.write(all_messages)
     file.close()
-
-
-
-check = '--dfgdfg'
-
-check2 = 'hui'
-
-print(check.split('--'))
-print(check2.split('--'))
