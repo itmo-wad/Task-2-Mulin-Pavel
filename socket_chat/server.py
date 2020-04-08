@@ -55,7 +55,6 @@ def handle_my_command(methods='GET'):
 def bot_speaking():
     time.sleep(5)
     dialog = ['hi', 'are you alone?', 'im very lonely', 'say something', 'i dont hear you', 'it was my fault', 'forgive me', 'say smth', 'please','i beg you', 'ok, good bye']
-    print(dialog)
     for number in range(len(dialog)-1):
         socketio.emit('bot response', {"message": dialog[number]})
         time.sleep(1)
