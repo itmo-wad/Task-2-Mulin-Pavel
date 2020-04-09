@@ -8,124 +8,40 @@ body {
     margin: 0 auto;
     max-width: 800px;
     padding: 0 20px;
+    background-color: #222222
 }
 
 .chat_window {
   max-height: 600px;
   min-height: 600px;
   border-radius: 5px;
-  border: 3px solid #0000ff;
-  background-color: #00aaff;
+  border: 3px solid #333333;
+  background-color: #444444;
   overflow: auto;
 }
 
 
 
-.new_message {
-  width: 99%;
-  height: 25px;
-  border-radius: 5px;
-  font-size: 20px;
-  border: 3px solid #0000ff;
-  background-color: #00aaff;
-}
-
-.container {
-    border: 2px solid #dedede;
-    background-color: #f1f1f1;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px 0;
-}
-
-.darker {
-    border-color: #ccc;
-    background-color: #ddd;
-}
-
-.container::after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
-.container img {
-    float: left;
-    max-width: 60px;
-    width: 100%;
-    margin-right: 20px;
-    border-radius: 50%;
-}
-
-.container img.right {
-    float: right;
-    margin-left: 20px;
-    margin-right:0;
-}
-
-.time-right {
-    float: right;
-    color: #aaa;
-}
-
-.time-left {
-    float: left;
-    color: #999;
-}
 </style>
 </head>
 <body>
 
-<h1>Chat Messages</h1>
+<h1>Hello everyone!</h1>
 
 <div class = 'chat_window'>
-  <h3>There is no message yet!</h3>
-  <h3>You can type --help :)</h3>
+  <h2>You can choose short polling or long polling bot messanger</h2>
+    <form method="get" action="http://short_polling">
+      <button type="submit">Short Polling</button>
+    </form>
+    <form method="get" action="http://long_polling">
+      <button type="submit">Long Polling</button>
+    </form>
+    <form method="get" action="/socket_chat">
+      <button type="submit">Socket</button>
+      <p>(The buttons of polling chats maybe unavailble, it's working on different proccess.)</p>
+    </form>
 </div>
 
-<form method="POST" action="posthere/" class = 'form'>
-      <input type="text" class="new_message">
-      <input type="submit" style = 'Width: 100%; font-size: 30px;'>
-  </form>
-
-
-
-
-
-
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
-      <script type="text/javascript">
-        var socket = io.connect('http://' + document.domain + ':' + location.port);
-
-        socket.on( 'connect', function() {
-          socket.emit( 'my event', {
-            data: 'User Connected'
-          } )
-          var form = $( 'form' ).on( 'submit', function( e ) {
-            e.preventDefault()
-            let user_name = 'user'
-            let user_input = $( 'input.new_message' ).val()
-            socket.emit( 'user_send', {
-              user_name : user_name,
-              message : user_input
-            }
-            )
-            $( 'input.new_message' ).val( '' ).focus()
-          } )
-        } )
-        socket.on( 'my response', function( msg ) {
-          console.log( msg )
-            $( 'h3' ).remove()
-            $( 'div.chat_window' ).append( '<div class="container"> <img src="/static/user.png" alt="Avatar" style="width:100%;"><p>'+msg.message+'</p><span class="time-right">11:02</span></div>' )
-            if (msg.message.indexOf('--')+1){ socket.emit( 'bot_command', {})} else {socket.emit( 'bot_response', {})}
-
-        })
-        socket.on( 'bot response', function( msg ) {
-          console.log( msg )
-            $( 'div.chat_window' ).append( '<div class="container darker"> <img src="/static/robot.jpeg" alt="Avatar" style="width:100%;"><p>'+msg.message+'</p><span class="time-left">11:02</span></div>' )
-        })
-      </script>
 
 </body>
 </html>

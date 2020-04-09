@@ -8,7 +8,6 @@ import store
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'vnkdjnfjknfl1232#'
-#socketio = SocketIO(app)
 CORS(app)
 
 messages = []
@@ -16,14 +15,29 @@ bot_speaking = False
 dialog = ['hi', 'are you alone?', 'im very lonely', 'say something', 'i dont hear you', 'it was my fault', 'forgive me', 'say smth', 'please','i beg you', 'ok, good bye']
 dialog.reverse()
 
+
+#start page
 @app.route('/')
 def sessions():
     return render_template('index.html')
 
+#short_polling page
+@app.route('/short_polling')
+def short_polling():
+    return render_template('short_polling.html')
+
+#long_polling page
+@app.route('/long_polling')
+def long_polling():
+    return render_template('long_polling.html')
+
+#used just for testing
 @app.route('/messageandanswer', methods=['GET', 'POST'])
 def receive_and_answer():
     return jsonify({"msg":"answer"})
 
+
+#receive all messages by polling
 @app.route('/message', methods=['POST'])
 def receiving_message():
     global messages
@@ -32,6 +46,7 @@ def receiving_message():
     store.store_messages(msg, 'user')
     return "received"
 
+#answer to user's message
 @app.route('/answer', methods=['GET'])
 def polling():
     global messages
@@ -70,7 +85,7 @@ def bot_speak():
 
 if __name__ == "__main__":
     try:
-        app.run(host='localhost',port=5000, threaded = True, debug=True)
+        app.run(host='0.0.0.0',port=80, threaded = True, debug=True)
     except Exception as e:
         print(e)
         print('why we here?')

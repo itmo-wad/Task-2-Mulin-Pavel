@@ -20,169 +20,28 @@ body {
   overflow: auto;
 }
 
-.button{
-   Width: 100%;
-   font-size: 30px;
-}
 
-.new_message {
-  width: 99%;
-  height: 25px;
-  border-radius: 5px;
-  font-size: 20px;
-  border: 3px solid #505050;
-  background-color: #555555;
-}
 
-.container {
-    border: 2px solid #dedede;
-    background-color: #777777;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px 0;
-}
-
-.darker {
-    border-color: #ccc;
-    background-color: #ddd;
-}
-
-.container::after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
-.container img {
-    float: left;
-    max-width: 60px;
-    width: 100%;
-    margin-right: 20px;
-    border-radius: 50%;
-}
-
-.container img.right {
-    float: right;
-    margin-left: 20px;
-    margin-right:0;
-}
-
-.time-right {
-    float: right;
-    color: #aaa;
-}
-
-.time-left {
-    float: left;
-    color: #999;
-}
 </style>
 </head>
 <body>
 
-<h1>Chat Messages</h1>
+<h1>Hello everyone!</h1>
 
 <div class = 'chat_window'>
-  <h3>There is no message yet!</h3>
-  <h3>Type 'alive' to start automatic messages</h3>
+  <h2>You can choose short polling or long polling bot messanger</h2>
+    <form method="get" action="/short_polling">
+      <button type="submit">Short Polling</button>
+    </form>
+    <form method="get" action="/long_polling">
+      <button type="submit">Long Polling</button>
+    </form>
+    <form method="get" action="http://socket_chat">
+      <button type="submit">Socket</button>
+      <p>(The button of socket chat maybe unavailble, it's working on different proccess.)</p>
+    </form>
 </div>
 
-<form method="POST" action="posthere/" class = 'form'>
-      <input type="text" class="new_message">
-  </form>
-  <input type=button onclick=sendMessage() style="width:100%;" value="send message!">
-
-
-
-
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
-      <script type="text/javascript">
-
-        var ready = true;
-
-        function just_send_then_receive(){
-          let user_input = $( 'input.new_message' ).val()
-          $( 'h3' ).remove()
-          $( 'div.chat_window' ).append( '<div class="container"> <img src="/static/user.png" alt="Avatar" style="width:100%;"><p>'+user_input+'</p><span class="time-right">11:02</span></div>' )
-          fetch('http://localhost:5000/messageandanswer',{
-            method: 'POST',
-            headers: {
-                    'Content-Type': 'application/json;charset=utf-8'
-                      },
-            body: user_input
-          })
-          .then((response) => {
-            console.log(response);
-            return response.json();
-          })
-          .then((data) => {
-            console.log(data);
-            $( 'div.chat_window' ).append( '<div class="container darker"> <img src="/static/robot.jpeg" alt="Avatar" style="width:100%;"><p>'+data.msg+'</p><span class="time-left">11:02</span></div>');
-          });
-        }
-
-        async function sendMessage(){
-          let user_input = $( 'input.new_message' ).val()
-          let response = await fetch('http://localhost:5000/message',{
-            method: 'POST',
-            headers: {
-    'Content-Type': 'application/json;charset=utf-8'
-  },
-            body: user_input
-          });
-          $( 'h3' ).remove()
-          $( 'div.chat_window' ).append( '<div class="container"> <img src="/static/user.png" alt="Avatar" style="width:100%;"><p>'+user_input+'</p><span class="time-right">11:02</span></div>' )
-}
-
-        function true_shortpoll(){
-            fetch('http://localhost:5000/answer',{
-            method: 'GET'
-          })
-          .then((response) => {
-            console.log(response);
-            return response.json();
-          })
-          .then((data) => {
-            console.log(data);
-            if (data.message != '200OK') {
-            $( 'h3' ).remove()
-            $( 'div.chat_window' ).append( '<div class="container darker"> <img src="/static/robot.jpeg" alt="Avatar" style="width:100%;"><p>'+data.message+'</p><span class="time-left">11:02</span></div>');
-} else {
-  console.log('200OK');
-}
-          });
-        }
-
-        function true_logpoll(){
-            if (!ready) { return; }
-            ready = false;
-            fetch('http://localhost:5000/answer',{
-            method: 'GET'
-          })
-          .then((response) => {
-            console.log(response);
-            return response.json();
-          })
-          .then((data) => {
-            console.log(data);
-            ready = true;
-            if (data.message != '200OK') {
-            $( 'h3' ).remove()
-            $( 'div.chat_window' ).append( '<div class="container darker"> <img src="/static/robot.jpeg" alt="Avatar" style="width:100%;"><p>'+data.message+'</p><span class="time-left">11:02</span></div>');
-
-          } else {
-            console.log('200OK');
-          }
-          });
-        }
-
-
-
-      //setInterval(true_shortpoll, 1000)
-      setInterval(true_logpoll, 1000)
-
-      </script>
 
 </body>
 </html>
