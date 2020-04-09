@@ -619,3 +619,36 @@ bot:Hello, human!
 user:hello
 bot:Hello, human!
 bot:Hello, human!
+user:
+bot:Sorry, i don't understand you.:(
+user:
+bot:Sorry, i don't understand you.:(
+user:
+user:
+bot:Sorry, i don't understand you.:(
+user:
+bot:Sorry, i don't understand you.:(
+bot:Sorry, i don't understand you.:(
+user:
+bot:Sorry, i don't understand you.:(
+user:
+bot:Sorry, i don't understand you.:(
+user:
+user:
+bot:Sorry, i don't understand you.:(
+user:
+bot:Sorry, i don't understand you.:(
+bot:Sorry, i don't understand you.:(
+user:hi
+user:
+bot:Sorry, i don't understand you.:(
+user:
+bot:Sorry, i don't understand you.:(
+user:
+user:
+bot:Sorry, i don't understand you.:(
+user:
+bot:Sorry, i don't understand you.:(
+bot:Sorry, i don't understand you.:(
+user:hi
+bot:Hello, human!

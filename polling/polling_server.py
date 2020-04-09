@@ -85,7 +85,7 @@ def bot_speak():
 
 if __name__ == "__main__":
     try:
-        app.run(host='0.0.0.0',port=80, threaded = True, debug=True)
+        app.run(host='0.0.0.0', threaded = True, debug=True)
     except Exception as e:
         print(e)
         print('why we here?')

@@ -87,10 +87,8 @@ body {
   <h3>Type 'alive' to start automatic messages</h3>
 </div>
 
-<form method="POST" action="posthere/" class = 'form'>
-      <input type="text" class="new_message">
-  </form>
-  <input type=button onclick=sendMessage() style="width:100%;" value="send message!">
+<input type="text" class="new_message">
+<input type=button onclick=sendMessage() style="width:100%;" value="send message!">
 
 
 
@@ -105,7 +103,7 @@ body {
           let user_input = $( 'input.new_message' ).val()
           $( 'h3' ).remove()
           $( 'div.chat_window' ).append( '<div class="container"> <img src="/static/user.png" alt="Avatar" style="width:100%;"><p>'+user_input+'</p><span class="time-right">11:02</span></div>' )
-          fetch('http://' + document.domain + ':' + location.port +'/messageandanswer',{
+          fetch('https://' + document.domain + ':' + location.port+'/messageandanswer',{
             method: 'POST',
             headers: {
                     'Content-Type': 'application/json;charset=utf-8'
@@ -124,7 +122,7 @@ body {
 
         async function sendMessage(){
           let user_input = $( 'input.new_message' ).val()
-          let response = await fetch('http://' + document.domain + ':' + location.port+'/message',{
+          let response = await fetch('https://' + document.domain + ':' + location.port+'/message',{
             method: 'POST',
             headers: {
     'Content-Type': 'application/json;charset=utf-8'
@@ -136,7 +134,7 @@ body {
 }
 
         function true_shortpoll(){
-            fetch('http://' + document.domain + ':' + location.port+'/answer',{
+            fetch('https://' + document.domain + ':' + location.port+'/answer',{
             method: 'GET'
           })
           .then((response) => {

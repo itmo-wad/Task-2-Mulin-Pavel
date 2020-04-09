@@ -1,0 +1,10 @@
+user:he
+bot:Sorry, i don't understand you.:(
+user:hello
+bot:Hello, human!
+user:my name is 
+bot:Sorry, i don't understand you.:(
+user:helo
+bot:Sorry, i don't understand you.:(
+user:hello
+bot:Hello, human!
